@@ -1,0 +1,61 @@
+const express = require('express');
+const router = express.Router();
+const products = require('../controller/getProducts');
+var md_auth = require('../middleware/authenticated');
+router.get(
+  '/get-allemployeeproducts',
+  products.getAllEmployeeProducts,
+);
+router.post(
+  '/add-products',
+  products.addProducts,
+);
+router.post(
+  '/add-companyproductbyid/:id',
+  products.addCompanyProduct,
+);
+router.post(
+  '/add-employeeproductbyid/:id',
+  products.addEmployeeProduct,
+);
+router.patch(
+  '/update-allproduct/:id',
+  products.updateProduct,
+);
+router.delete(
+  '/delete-product/:id',
+  products.deleteProduct,
+);
+router.get(
+  '/get-all-products',
+  products.getAllProducts,
+);
+router.patch(
+  '/update-productbycompanyId/:id',
+  products.updateCompanyProduct,
+);
+router.patch(
+  '/update-employeeproductbycompanyid/:id',
+  products.updateEmployeeProduct,
+);
+router.delete(
+  '/delete-companyproductbyid/:id',
+  products.deleteCompanyProduct,
+);
+router.delete(
+  '/delete-employeeproductbyid/:id',
+  products.deleteEmployeeProduct,
+);
+router.get(
+  '/get-getemployeeproductbycompanyId',
+  products.getEmployeeProductByCompanyId,
+);
+router.get(
+  '/get-productsbycompanyId',
+  products.getProductsByCompanyId,
+);
+router.get(
+  '/get-productsbyemployeeId',
+  products.getProductsByEmployeeId,
+);
+module.exports = router;
