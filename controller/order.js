@@ -133,7 +133,7 @@ const EmployeeMailOptionsF = (employeeEmail, managerEmail, companyName, orderInf
     html: htmlContent,
   };
 };
-const adminManagerEmployeeMailOptionsF = (employeeEmail, managerEmail, companyName, orderInfo, pricingStatus) => {
+const adminManagerEmployeeMailOptionsF = (employeeEmail, managerEmail, companyName, orderInfo, pricingStatus,comment) => {
   const { bill, employeeProducts } = orderInfo;
   let productsTable = '';
   if (Array.isArray(JSON.parse(employeeProducts))) {
@@ -178,8 +178,6 @@ const validation = (CompanyId, companyIdAsObjectId, res) => {
 
 const addOrders = async (req, res) => {
   try {
-
-
     const ordersArray = req.body;
     console.log("lan", ordersArray[0]?.language)
     // i18next.changeLanguage(ordersArray[0].language);
@@ -241,7 +239,7 @@ const addOrders = async (req, res) => {
           ordersArray[i].companyName,
           orderInfo,
           ordersArray[0].pricingStatus,
-          ordersArray[0].comment
+          ordersArray[0]?.comment
         );
 
         sendEmail(mailOptions);
@@ -284,7 +282,7 @@ const addOrders = async (req, res) => {
         companyName: orderData.companyName,
         bill: orderData.bill,
         quantity: orderData.quantity,
-        comment: orderData.comment,
+        comment: orderData?.comment,
         invoice: invoice,
         createdAt: getCurrentDate(),
         employeeName: orderData.employeeName,
