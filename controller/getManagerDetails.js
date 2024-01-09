@@ -62,7 +62,7 @@ const updateManager = async (req, res) => {
     }
     if(managerPassword){
       let mailOptions = {
-        from: 'sys.notification77@gmail.com',
+        from: 'subhan.akram1971@gmail.com',
         to: managerEmail,
         subject: `Neue Zugangsdaten - Manager`,
         text: `Sehr geehrte(r),

@@ -115,7 +115,7 @@ const updateEmployee = async (req, res) => {
     }
     if(employeePassword){
       let mailOptions = {
-        from: 'sys.notification77@gmail.com',
+        from: 'subhan.akram1971@gmail.com',
         to: employeeEmail,
         subject: `Neue Zugangsdaten - Mitarbeiter`,
         text: `Willkommen!
@@ -125,9 +125,9 @@ const updateEmployee = async (req, res) => {
         E-Mail: ${employeeEmail}
         Passwort: ${employeePassword}
         
-        Zum Einloggen, besuche: https://klick77.eu/login?role=employee
+        Zum Einloggen, besuche: subhan.akram1971@gmail.com
         
-        Bei Problemen, kontaktiere unser Support-Team: kundenservice@stick77.lu.
+        Bei Problemen, kontaktiere unser Support-Team: subhan.akram1971@gmail.com.
         
         Vielen Dank, dass du dabei bist!
 

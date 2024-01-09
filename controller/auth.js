@@ -62,10 +62,10 @@ const sendGernalEmail=async(req,res)=>{
   try{
       const {email,password}=req.body;
       let mailOptions = {
-        from: 'sys.notification77@gmail.com',
+        from: 'subhan.akram1971@gmail.com',
         to: email,
         subject: `Budget Increase Request`,
-        text: `Your Password ${password}  Link : https://system-frontend-ten.vercel.app/`,
+        text: `Your Password ${password}  Link : https://clothing-management-frontend.vercel.app/`,
 
       };
       sendEmail(mailOptions);

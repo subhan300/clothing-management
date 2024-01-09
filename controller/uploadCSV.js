@@ -155,7 +155,7 @@ const uploadCSV = (req, res) => {
                   console.log('emp', emp);
                   for (let i = 0; i < emp.length; i++) {
                     mailOptions = {
-                      from: 'sys.notification77@gmail.com',
+                      from: 'subhan.akram1971@gmail.com',
                       to: emp[i].employeeEmail,
                       subject: `Hello ${emp[i]?.employeeName} ,Your Credentials`,
                       text: `Email : ${emp[i]?.employeeEmail} , Password : ${emp[i].employeePassword}`,
