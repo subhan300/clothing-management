@@ -81,7 +81,7 @@ const uploadCSV = (req, res) => {
 
           const savedManager = await newManager.save();
           let mailOptions = {
-            from: 'sys.notification77@gmail.com',
+            from: 'subhan.akram1971@gmail.com',
             to: jsonObj[i].managerEmail,
             subject: `Hello ${jsonObj[i]?.managerName} ,Your Credentials`,
             text: `Email : ${jsonObj[i]?.managerEmail} , Password : ${jsonObj[i]?.managerName + '123'} }`,

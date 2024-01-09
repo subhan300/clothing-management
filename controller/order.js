@@ -3,7 +3,7 @@ const Employee = require('../models/employee');
 const employeeProducts = require('../models/employeeProducts');
 const Company = require('../models/company');
 const mongoose = require('mongoose');
-const { sendEmail, getCurrentDate,formatPrice } = require('../global-functions/GlobalFunctions');
+const { sendEmail, getCurrentDate, formatPrice } = require('../global-functions/GlobalFunctions');
 // const employee = require('../models/employee');
 const Manager = require('../models/manager');
 const orderCounter = require('../models/orderCounter');
@@ -22,21 +22,21 @@ function generateInvoiceNumber(order) {
 }
 
 
-const adminMailOptionsF = (ordersArray, managerEmail, companyName, orderInfo,comment) => {
+const adminMailOptionsF = (ordersArray, managerEmail, companyName, orderInfo, comment) => {
   let summaryTable = '';
   let totalBill = 0;
 
   // Loop through each order
-  for(let order of ordersArray) {
-      const { bill, employeeProducts } = order;
-      totalBill += bill;
-      let productsTable = '';
+  for (let order of ordersArray) {
+    const { bill, employeeProducts } = order;
+    totalBill += bill;
+    let productsTable = '';
 
-      // Loop through each product
-      if (Array.isArray(employeeProducts)) {
-          employeeProducts.forEach((product) => {
-          const { productName, productSize, productImage, productPrice, productQuantity } = product;
-          productsTable += `
+    // Loop through each product
+    if (Array.isArray(employeeProducts)) {
+      employeeProducts.forEach((product) => {
+        const { productName, productSize, productImage, productPrice, productQuantity } = product;
+        productsTable += `
               <div>
               <img src=${productImage} style="max-width: 100px; max-height: 100px;">
               <h3>Produktname: ${productName}</h3>
@@ -45,64 +45,64 @@ const adminMailOptionsF = (ordersArray, managerEmail, companyName, orderInfo,com
               <p>Menge: ${productQuantity}</p>
              
               </div>\n`;
-          });
-         
-          productsTable += `<p>Gesamtpreis: ${formatPrice(bill)}</p>`
-      }
-      // Add the products table for this order to the summary
-      summaryTable += `<h2>Bestellung für den Mitarbeiter ${order.employeeName} vom: ${order.name}-> " ${companyName} "</h2>` + productsTable;
-     
+      });
+
+      productsTable += `<p>Gesamtpreis: ${formatPrice(bill)}</p>`
+    }
+    // Add the products table for this order to the summary
+    summaryTable += `<h2>Bestellung für den Mitarbeiter ${order.employeeName} vom: ${order.name}-> " ${companyName} "</h2>` + productsTable;
+
   }
   summaryTable += `<h2>TOTAL-PREIS: ${formatPrice(totalBill)}</h2>`;
-  summaryTable +=`<h3>${comment}</h3>`
+  summaryTable += `<h3>${comment}</h3>`
   return {
-    from: 'sys.notification77@gmail.com',
-    to: ['inhaber1977@gmail.com', 'bestellungen@stick77.lu'],
+    from: 'subhan.akram1971@gmail.com',
+    to: ['subhan.akram2400@gmail.com'],
     subject: 'Neue Bestellung erstellt..!!!',
-    html:summaryTable,
+    html: summaryTable,
   };
 };
-const managerMailOptionsF = (ordersArray, managerEmail, companyName, orderInfo, pricingStatus,comment) => {
+const managerMailOptionsF = (ordersArray, managerEmail, companyName, orderInfo, pricingStatus, comment) => {
   let summaryTable = '';
   let totalBill = 0;
 
   // Loop through each order
-  for(let order of ordersArray) {
-      const { bill, employeeProducts } = order;
-      totalBill += bill;
-      let productsTable = '';
+  for (let order of ordersArray) {
+    const { bill, employeeProducts } = order;
+    totalBill += bill;
+    let productsTable = '';
 
-      // Loop through each product
-      if (Array.isArray(employeeProducts)) {
-          employeeProducts.forEach((product) => {
-          const { productName, productSize, productImage, productPrice, productQuantity } = product;
-          productsTable += `
+    // Loop through each product
+    if (Array.isArray(employeeProducts)) {
+      employeeProducts.forEach((product) => {
+        const { productName, productSize, productImage, productPrice, productQuantity } = product;
+        productsTable += `
               <div>
               <img src=${productImage} style="max-width: 100px; max-height: 100px;">
               <h3>Produktname: ${productName}</h3>
               <p>Größe: ${productSize}</p>
-              ${pricingStatus?`<p>Preis: ${formatPrice(productPrice)}</p>`:" "}
+              ${pricingStatus ? `<p>Preis: ${formatPrice(productPrice)}</p>` : " "}
               <p>Menge: ${productQuantity}</p>
              
               </div>\n`;
-          });
-      }
-      pricingStatus?productsTable += `<p>Gesamtpreis: ${formatPrice(bill)}</p>`:""
-     
-      // Add the products table for this order to the summary
-      summaryTable += `<h2>Bestellung für den Mitarbeiter ${order.employeeName} vom Unternehmen: ${companyName}</h2>` + productsTable;
-     
+      });
+    }
+    pricingStatus ? productsTable += `<p>Gesamtpreis: ${formatPrice(bill)}</p>` : ""
+
+    // Add the products table for this order to the summary
+    summaryTable += `<h2>Bestellung für den Mitarbeiter ${order.employeeName} vom Unternehmen: ${companyName}</h2>` + productsTable;
+
   }
   summaryTable += `<h2>TOTAL-PREIS: ${formatPrice(totalBill)}</h2>`;
-  summaryTable +=`<h3>${comment}</h3>`
+  summaryTable += `<h3>${comment}</h3>`
   return {
-    from: 'sys.notification77@gmail.com',
+    from: 'subhan.akram1971@gmail.com',
     to: [managerEmail],
     subject: 'Neue Bestellung erstellt..!!!',
     html: summaryTable,
   };
 };
-const EmployeeMailOptionsF = (employeeEmail, managerEmail, companyName, orderInfo, pricingStatus,comment) => {
+const EmployeeMailOptionsF = (employeeEmail, managerEmail, companyName, orderInfo, pricingStatus, comment) => {
   const { bill, employeeProducts } = orderInfo;
   let productsTable = '';
   if (Array.isArray(JSON.parse(employeeProducts))) {
@@ -127,7 +127,7 @@ const EmployeeMailOptionsF = (employeeEmail, managerEmail, companyName, orderInf
 `;
 
   return {
-    from: 'sys.notification77@gmail.com',
+    from: 'subhan.akram1971@gmail.com',
     to: [employeeEmail],
     subject: "Neue Bestellung erstellt..!!!",
     html: htmlContent,
@@ -158,30 +158,30 @@ const adminManagerEmployeeMailOptionsF = (employeeEmail, managerEmail, companyNa
      <h3>${comment}</h3>
 `;
   return {
-    from: 'sys.notification77@gmail.com',
-    to: ['inhaber1977@gmail.com', 'bestellungen@stick77.lu', managerEmail],
+    from: 'subhan.akram1971@gmail.com',
+    to: [managerEmail],
     subject: `Neue Bestellung erstellt..!!!`,
     html: htmlContent,
   };
 };
 
 const validation = (CompanyId, companyIdAsObjectId, res) => {
- 
+
   if (CompanyId.equals(companyIdAsObjectId)) {
- 
+
     return true;
   } else {
-   
+
     return false;
   }
 };
 
 const addOrders = async (req, res) => {
   try {
-   
-    
+
+
     const ordersArray = req.body;
-    console.log("lan",ordersArray[0]?.language)
+    console.log("lan", ordersArray[0]?.language)
     // i18next.changeLanguage(ordersArray[0].language);
     const orders = [];
     let isValidOrder = true;
@@ -195,7 +195,7 @@ const addOrders = async (req, res) => {
     if (!Company) {
       return res.status(400).send({ message: 'Company not found' });
     }
-   
+
     const getEmployee = await Employee.findById(ordersArray[0].employeeId);
 
     if (!validation(Company._id, getEmployee.companyId, res)) {
@@ -218,14 +218,14 @@ const addOrders = async (req, res) => {
         managerOrder: ordersArray,
         createdAt: getCurrentDate(),
       });
-    
+
       newOrders = await order.insertMany(orderObj);
-      
+
       if (Company.budgetStatus) {
-      
+
         for (const orders of newOrders[0].managerOrder) {
           const { employeeId, bill } = orders;
-         
+
           await Employee.findOneAndUpdate({ _id: employeeId }, { $inc: { budget: -bill } });
         }
       }
@@ -243,36 +243,36 @@ const addOrders = async (req, res) => {
           ordersArray[0].pricingStatus,
           ordersArray[0].comment
         );
-      
+
         sendEmail(mailOptions);
-       
+
       }
-       
-        let mailOptions = managerMailOptionsF(
-          ordersArray,
-          ordersArray[0].managerEmail,
-          ordersArray[0].companyName,
-          ordersArray,
-          ordersArray[0].pricingStatus,
-          ordersArray[0].comment
-        );
 
-        let adminMailOptions = adminMailOptionsF(
-          ordersArray,
-          ordersArray[0].managerEmail,
-          ordersArray[0].companyName,
-          ordersArray,
-          ordersArray[0].comment
-       
-        );
-        sendEmail(mailOptions);
+      let mailOptions = managerMailOptionsF(
+        ordersArray,
+        ordersArray[0].managerEmail,
+        ordersArray[0].companyName,
+        ordersArray,
+        ordersArray[0].pricingStatus,
+        ordersArray[0].comment
+      );
 
-        sendEmail(adminMailOptions);
+      let adminMailOptions = adminMailOptionsF(
+        ordersArray,
+        ordersArray[0].managerEmail,
+        ordersArray[0].companyName,
+        ordersArray,
+        ordersArray[0].comment
+
+      );
+      sendEmail(mailOptions);
+
+      sendEmail(adminMailOptions);
     } else {
-   
+
       let orderData = ordersArray[0];
       const { employeeId, bill } = orderData;
-    
+
 
       const manager = await Manager.find({ companyId: orderData.companyId });
 
@@ -288,10 +288,10 @@ const addOrders = async (req, res) => {
         invoice: invoice,
         createdAt: getCurrentDate(),
         employeeName: orderData.employeeName,
-        
+
       });
       orders.push(orderObj);
-      
+
       if (!isValidOrder) {
         return res.status(400).send({
           message: 'Invalid order - employee budget is insufficient',
@@ -299,9 +299,9 @@ const addOrders = async (req, res) => {
       }
 
       newOrders = await order.insertMany(orderObj);
-     
+
       if (Company.budgetStatus) {
-       
+
         await Employee.findOneAndUpdate({ _id: employeeId }, { $inc: { budget: -bill } });
       }
 
@@ -319,10 +319,10 @@ const addOrders = async (req, res) => {
         ordersArray[0].comment
       );
       let adminMailOptions = adminManagerEmployeeMailOptionsF(orderData.employeeEmail,
-          manager[0].managerEmail,
-          orderData.companyName,
-          orderInfo,ordersArray[0].comment)
-     
+        manager[0].managerEmail,
+        orderData.companyName,
+        orderInfo, ordersArray[0].comment)
+
       sendEmail(mailOptions);
       sendEmail(adminMailOptions);
 

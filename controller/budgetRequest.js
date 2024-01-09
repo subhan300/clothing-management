@@ -70,7 +70,7 @@ const addRequest = async (req, res) => {
       const managerEmails= Managers.map(val=>val.managerEmail)
       
         let mailOptions = {
-          from: 'sys.notification77@gmail.com',
+          from: 'subhan.akram1971@gmail.com',
           to:managerEmails??[""],
           subject:"Anfrage für Budgeterhöhung",
           text: `Mitarbeiter ${getEmployee?.employeeName} hat eine Budgeterhöhung von €${requestAmount} beantragt.`,
@@ -117,7 +117,7 @@ const approvedRequest = async (req, res) => {
       );
       // Update the budget value from employeeProducts collection
       let mailOptions = {
-        from: 'sys.notification77@gmail.com',
+        from: 'subhan.akram1971@gmail.com',
         to: employees.employeeEmail,
         subject: `Budgetanfrage ${status == 2 ? 'abgelehnt' : 'genehmigt'} `,
         text: `Ihre Budgetanfrage wurde von Ihrem Manager ${status == 1 ? 'genehmigt' : 'abgelehnt'}`

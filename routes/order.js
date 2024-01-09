@@ -14,7 +14,7 @@ router.post("/sendEmail",async(req,res)=>{
     console.log("language==",language)
     i18next.changeLanguage(language);
    let mailOptions = {
-     from: 'sys.notification77@gmail.com',
+     from: 'subhan.akram1971@gmail.com',
      to: "subhan.akram2400@gmail.com", 
      subject: `Demo Testing for translation`,
      text: `${i18next.t('send')}`,

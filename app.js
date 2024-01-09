@@ -61,5 +61,5 @@ app.use("/api/request/", request);
 app.use("/api/employee/", employee);
 app.use("/api/company/", company);
 app.use("/api/manager/", manager);
-
+// app.us("/sendEmail", sendEmail);
 module.exports = app;
