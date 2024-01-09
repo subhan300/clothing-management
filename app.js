@@ -9,65 +9,13 @@ const i18nextMiddleware = require('i18next-http-middleware');
 const Backend = require('i18next-node-fs-backend');
 const path = require('path');
 
-// Import routes for authentication
-const employeeLogin = require('./routes/auth');
-const employeeSignUp = require('./routes/auth');
-const managerLogin = require('./routes/auth');
-const adminLogin = require('./routes/auth');
-
-// Import routes for products
-const addProduct = require('./routes/products');
-const addCompanyProductById = require('./routes/products');
-const updateProduct = require('./routes/products');
-const deleteProduct = require('./routes/products');
-const getProducts = require('./routes/products');
-const getAllEmployeeProducts = require('./routes/products');
-const deleteCompanyProduct = require('./routes/products');
-const deleteEmployeeProduct = require('./routes/products');
-const updateCompanyProduct = require('./routes/products');
-const updateEmployeeProduct = require('./routes/products');
-const getProductsByCompanyId = require('./routes/products');
-const getEmployeeProductsByCompanyId = require('./routes/products');
-const getProductsByEmployeeId = require('./routes/products');
-const addEmployeeProductByCompanyId = require('./routes/products');
-
-// Import routes for orders
-const addOrder = require('./routes/order');
-const getOrder = require('./routes/order');
-const getTotalOrder = require('./routes/order');
-const getOrderByEmployeeId = require('./routes/request');
-const getOrderByCompanyId = require('./routes/request');
-
-// Import routes for requests
-const getRequest = require('./routes/request');
-const addRequest = require('./routes/request');
-const approvedRequest = require('./routes/request');
-const changeBudgetByManager = require('./routes/request');
-
-// Import routes for employees
-const getEmployeeByCompanyId = require('./routes/employee');
-const getTotalEmployee = require('./routes/employee');
-const getEmployee = require('./routes/employee');
-const addEmployees = require('./routes/employee');
-const editEmployee = require('./routes/employee');
-const deleteEmployee = require('./routes/employee');
-
-// Import routes for company details
-const addCompany = require('./routes/company');
-const editCompany = require('./routes/company');
-const getCompanyDetails = require('./routes/company');
-const getAllCompanies = require('./routes/company');
-
-// Import routes for managers
-const addManagers = require('./routes/manager');
-const editManager = require('./routes/manager');
-const deleteManager = require('./routes/manager');
-const getManagers = require('./routes/manager');
-const getAllManagers = require('./routes/manager');
-const getTotalManager = require('./routes/manager');
-const getManagersByCompanyId = require('./routes/manager');
-
-// Import dashboard route
+const auth = require('./routes/auth');
+const product = require('./routes/products');
+const order = require('./routes/order');
+const request = require('./routes/request');
+const employee = require('./routes/employee');
+const company = require('./routes/company');
+const manager = require('./routes/manager');
 const dashboarRoute = require('./routes/dashboard');
 
 // Initialize i18next with the backend
@@ -108,56 +56,13 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/api/auth/', employeeLogin);
-app.use('/api/auth/', employeeSignUp);
-app.use('/api/auth/', managerLogin);
-app.use('/api/auth/', adminLogin);
+app.use('/api/auth/', auth);
+app.use('/api/product/', product);
+app.use('/api/order/', order);
+app.use('/api/request/', request);
+app.use('/api/employee/', employee);
+app.use('/api/company/', company);
+app.use('/api/manager/', manager);
 
-app.use('/api/product/', addProduct);
-app.use('/api/product/', updateProduct);
-app.use('/api/product/', deleteProduct);
-app.use('/api/product/', getProducts);
-app.use('/api/product/', getAllEmployeeProducts);
-app.use('/api/product/', deleteCompanyProduct);
-app.use('/api/product/', deleteEmployeeProduct);
-app.use('/api/product/', updateCompanyProduct);
-app.use('/api/product/', updateEmployeeProduct);
-app.use('/api/product/', getProductsByCompanyId);
-app.use('/api/product/', getEmployeeProductsByCompanyId);
-app.use('/api/product/', getProductsByEmployeeId);
-app.use('/api/product/', addCompanyProductById);
-app.use('/api/product/', addEmployeeProductByCompanyId);
-
-app.use('/api/order/', addOrder);
-app.use('/api/order/', getOrder);
-app.use('/api/order/', getTotalOrder);
-app.use('/api/dashboard/', dashboarRoute);
-app.use('/api/order/', getOrderByEmployeeId);
-app.use('/api/order/', getOrderByCompanyId);
-
-app.use('/api/request/', getRequest);
-app.use('/api/request/', addRequest);
-app.use('/api/request/', approvedRequest);
-app.use('/api/request/', changeBudgetByManager);
-
-app.use('/api/employee/', editEmployee);
-app.use('/api/employee/', addEmployees);
-app.use('/api/employee/', deleteEmployee);
-app.use('/api/employee/', getEmployeeByCompanyId);
-app.use('/api/employee/', getEmployee);
-app.use('/api/employee/', getTotalEmployee);
-
-app.use('/api/company/', addCompany);
-app.use('/api/company/', editCompany);
-app.use('/api/company/', getCompanyDetails);
-app.use('/api/company/', getAllCompanies);
-
-app.use('/api/manager/', addManagers);
-app.use('/api/manager/', editManager);
-app.use('/api/manager/', deleteManager);
-app.use('/api/manager/', getManagers);
-app.use('/api/manager/', getAllManagers);
-app.use('/api/manager/', getTotalManager);
-app.use('/api/manager/', getManagersByCompanyId);
 
 module.exports = app;
